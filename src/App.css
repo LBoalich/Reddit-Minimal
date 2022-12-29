@@ -1,13 +1,28 @@
 .App {
-  text-align: center;
+  width: 100%;
 }
 
-.App-header {
-  min-height: 100vh;
+.navbar {
+  background-color: grey;
+  position: fixed; /* Make it stick/fixed */
+  top: 0; /* Stay on top */
+  width: 100%; /* Full width */
+  transition: top 0.3s; /* Transition effect when sliding down (and up) */
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
 }
+
+.navbar div {
+  height: 100%;
+  padding: 5px;
+}
+
+.navbar input[type=text] {
+  padding: 6px;
+  border: none;
+  font-size: 17px;
+}
+
+
 
