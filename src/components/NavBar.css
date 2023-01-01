@@ -1,0 +1,26 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+  
+.navbar div {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.home {
+    padding-left: 10px;
+}
+  
+.navbar input[type=text] {
+    border: none;
+    font-size: 17px;
+}
+
+.logo {
+    padding-right: 10px;
+}
+
