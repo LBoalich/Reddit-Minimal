@@ -21,7 +21,7 @@
   margin: 0 15px 0 30px;
 }
 
-.subreddits {
+.subreddits-container {
   flex-basis: 25%;
   flex-shrink: 0;
   height:auto;
@@ -30,8 +30,20 @@
   margin: 0 30px 0 15px;
 }
 
-.subreddits h1 {
+.subreddits-title {
   text-align: center;
+  font-size: 30px;
+}
+
+.subreddits-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.subreddit-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 

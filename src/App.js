@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/NavBar';
+import Navbar from "./components/NavBar/NavBar";
+import Subreddits from './features/subreddits/Subreddits';
 
 function App() {
   
@@ -13,12 +14,7 @@ function App() {
           <p class="post">Next Posts goes here</p>
           <p class="post">And another one</p>
         </div>
-        <div class="subreddits">
-          <h1>Subreddits</h1>
-          <p class="subreddit">Sub 1</p> {/* Map over subreddits */}
-          <p class="subreddit">Sub 2</p> 
-          <p class="subreddit">Sub 3</p>
-        </div>
+        <Subreddits />
       </div>
     </div>
   );
