@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { debounce } from '../utilities/helpers';
-import "./NavBar.css";
-import Search from "../features/search/Search";
+import { debounce } from '../../utilities/helpers';
+import Search from "../../features/search/Search";
 
 const Navbar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -33,12 +32,12 @@ const Navbar = () => {
 
   return (
     <div style={{ ...navbarStyles, top: visible ? '0' : '-50px' }}>
-      <nav class="navbar">
-        <div class="home">
+      <nav className="navbar">
+        <div className="home">
           <a href="">redditMinimal</a> {/* add href link so returns to home state */}
         </div>
         <Search />
-        <div class="logo">
+        <div className="logo">
           <img src="" alt="" /> {/* add reddit logo.  On click returns to home */}
         </div>
       </nav>
