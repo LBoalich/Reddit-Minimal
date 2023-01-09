@@ -1,7 +1,7 @@
 import React from 'react';
 import Subreddit from './Subreddit';
 
-export default function SubredditList({ subreddits }) {
+export default function SubredditsList({ subreddits }) {
   if (!subreddits) {
     return null;
   };

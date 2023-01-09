@@ -5,7 +5,7 @@ import {
   selectSubreddits,
   isLoadingSubreddits,
 } from "./subredditsSlice";
-import SubredditList from "../../components/Subreddits/SubredditsList";
+import SubredditsList from "../../components/Subreddits/SubredditsList";
 
 const Subreddits = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const Subreddits = () => {
   return (
     <div className='subreddits-container'>
       <h3 className='subreddits-title'>Subreddits</h3>
-      <SubredditList subreddits={subreddits} />
+      <SubredditsList subreddits={subreddits} />
     </div>
   );
 };
