@@ -3,9 +3,9 @@ import { fetchSubreddits } from "../../utilities/api";
 
 export const loadSubreddits = createAsyncThunk(
     "subreddits/fetchSubreddits",
-    async ( {firstArg, secondArg }, ThunkAPI) => {
-        const data = await fetchSubreddits();
-        const json = await data.json();
+    async () => {
+        const response = await fetchSubreddits();
+        const json = await response.json();
         return json;
     }
 );
@@ -13,20 +13,7 @@ export const loadSubreddits = createAsyncThunk(
 export const subredditsSlice = createSlice({
     name: 'subreddits',
     initialState: {
-        subreddits: [
-            {
-                name: "display_name",
-                img: "header_img",
-                title: "fake title",
-                url: "fake url",
-            },
-            {
-                name: "display_name2",
-                img: "header_img2",
-                title: "fake title 2",
-                url: "fake url 2",
-            },
-        ],
+        subreddits: [],
         isLoadingSubreddits: false,
         hasError: false
     },
@@ -36,7 +23,7 @@ export const subredditsSlice = createSlice({
             state.hasError = false;
         },
         [loadSubreddits.fulfilled]: (state, action) => {
-            state.subreddits = action.payload;
+            state.subreddits = action.payload.data.children.map(subreddit => subreddit.data);
             state.isLoadingSubreddits = false;
             state.hasError = false;
         },

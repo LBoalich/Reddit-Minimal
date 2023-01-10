@@ -137,18 +137,34 @@
 
 .subreddits-title {
   text-align: center;
-  font-size: 30px;
+  font-size: 35px;
+  margin: 15px 0 20px 0;
 }
 
 .subreddits-list {
   display: flex;
   flex-direction: column;
+  padding: 0px;
 }
 
 .subreddit-container {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 10px;
+}
+
+.subreddit-icon {
+  border-radius: 50%;
+  height: 45px;
+  width: 45px;
+  padding: 5px;
+}
+
+.subreddit-name {
+  padding: 5px;
+  margin: 0;
+  font-size: 20px;
 }
 
 
