@@ -1,5 +1,5 @@
 export const fetchPosts = () => {
-
+    return fetch("https://www.reddit.com/r/popular.json");
 };
 
 export const fetchSubreddits = () => {

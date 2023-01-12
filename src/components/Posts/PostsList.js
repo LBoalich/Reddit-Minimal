@@ -8,7 +8,7 @@ export default function PostsList({ posts }) {
   
   return (
     <ul className='posts-list'>
-      {posts.map(post => {
+      {posts.map((post) => {
         return <Post post={post} />
       })}
     </ul>

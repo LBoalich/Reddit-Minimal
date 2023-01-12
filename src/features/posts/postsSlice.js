@@ -3,9 +3,9 @@ import { fetchPosts } from "../../utilities/api";
 
 export const loadPosts = createAsyncThunk(
     "posts/fetchPosts",
-    async ( {firstArg, secondArg }, ThunkAPI) => {
-        const data = await fetchPosts();
-        const json = await data.json();
+    async () => {
+        const response = await fetchPosts();
+        const json = await response.json();
         return json;
     }
 );
@@ -13,46 +13,7 @@ export const loadPosts = createAsyncThunk(
 export const postsSlice = createSlice({
     name: 'posts',
     initialState: {
-        posts: [
-            {
-                kind: "listing",
-                data: {
-                    children: [{
-                        kind: "link",
-                        data: {
-                            author: "Author 1",
-                            media: "",
-                            mediaEmbed: "Media 1",
-                            numComments: "Com#1",
-                            score: "Score 1",
-                            selftextHtml: "HTML Text 1",
-                            thumbnail: "",
-                            title: "Title 1",
-                            name: "",
-                        }
-                    }]
-                }
-            },
-            {
-                kind: "listing2",
-                data: {
-                    children: [{
-                        kind: "link2",
-                        data: {
-                            author: "Author 2",
-                            media: "",
-                            mediaEmbed: "Media 2",
-                            numComments: "Com#2",
-                            score: "Score 2",
-                            selftextHtml: "HTML Text 2",
-                            thumbnail: "",
-                            title: "Title 2",
-                            name: "",
-                        }
-                    }]
-                }
-            },
-        ],
+        posts: [],
         isLoadingPosts: false,
         hasError: false
     },    
@@ -62,7 +23,7 @@ export const postsSlice = createSlice({
             state.hasError = false;
         },
         [loadPosts.fulfilled]: (state, action) => {
-            state.posts.posts = action.payload;
+            state.posts = action.payload.data.children.map(post => post.data);
             state.isLoadingPosts = false;
             state.hasError = false;
         },
@@ -75,6 +36,7 @@ export const postsSlice = createSlice({
 
 export const selectPosts = (state) => state.posts.posts;
 export const isLoadingPosts = (state) => state.posts.isLoading;
+
 
 export default postsSlice.reducer;
       
