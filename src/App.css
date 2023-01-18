@@ -98,7 +98,7 @@
 }
 
 .title {
-  padding-top: 20px;
+  padding: 20px;
 }
 
 .post-url {
@@ -169,6 +169,38 @@
   padding-right: 5px;
 }
 
+.comments-container {
+  background-color: lightgray;
+  padding: 3px;
+}
+
+.comments-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px;
+}
+
+.comment-container {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin-bottom: 10px;
+}
+
+.comment-body {
+  padding: 10px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.comment-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 10px 0 10px;
+}
+
 .subreddits-container {
   flex-basis: 22%;
   height:auto;
@@ -210,6 +242,3 @@
   margin: 0;
   font-size: 20px;
 }
-
-
-

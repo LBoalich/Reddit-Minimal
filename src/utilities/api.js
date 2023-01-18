@@ -6,6 +6,6 @@ export const fetchSubreddits = () => {
     return fetch("https://www.reddit.com/subreddits.json");
 };
 
-export const fetchComments = (postId) => {
-
+export const fetchComments = (id, subreddit, titleNoSpaces) => {
+     return fetch(`https://www.reddit.com/r/${subreddit}/comments/${id}/${titleNoSpaces}/.json`);
 };
