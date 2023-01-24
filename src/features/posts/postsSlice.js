@@ -15,22 +15,23 @@ export const postsSlice = createSlice({
     initialState: {
         posts: [],
         isLoadingPosts: false,
-        hasError: false
+        failedToLoadPosts: false
     },    
-    extraReducers: {
-        [loadPosts.pending]: (state, action) => {
+    extraReducers: (builder) => {
+        builder
+          .addCase(loadPosts.pending, (state) => {
             state.isLoadingPosts = true;
-            state.hasError = false;
-        },
-        [loadPosts.fulfilled]: (state, action) => {
+            state.failedToLoadPosts = false;
+          })
+          .addCase(loadPosts.fulfilled, (state, action) => {
             state.posts = action.payload.data.children.map(post => post.data);
             state.isLoadingPosts = false;
-            state.hasError = false;
-        },
-        [loadPosts.rejected]: (state, action) => {
+            state.failedToLoadPosts = false;
+          })
+          .addCase(loadPosts.rejected, (state) => {
             state.isLoadingPosts = false;
-            state.hasError = true;
-        }
+            state.failedToLoadPosts = true;
+          })
     }
 });
 

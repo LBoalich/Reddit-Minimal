@@ -15,22 +15,23 @@ export const subredditsSlice = createSlice({
     initialState: {
         subreddits: [],
         isLoadingSubreddits: false,
-        hasError: false
+        failedToLoadSubreddits: false
     },
-    extraReducers: {
-        [loadSubreddits.pending]: (state, action) => {
+    extraReducers: (builder) => {
+        builder
+          .addCase(loadSubreddits.pending, (state) => {
             state.isLoadingSubreddits = true;
-            state.hasError = false;
-        },
-        [loadSubreddits.fulfilled]: (state, action) => {
+            state.failedToLoadSubreddits = false;
+          })
+          .addCase(loadSubreddits.fulfilled, (state, action) => {
             state.subreddits = action.payload.data.children.map(subreddit => subreddit.data);
             state.isLoadingSubreddits = false;
-            state.hasError = false;
-        },
-        [loadSubreddits.rejected]: (state, action) => {
+            state.failedToLoadSubreddits = false;
+          })
+          .addCase(loadSubreddits.rejected, (state) => {
             state.isLoadingSubreddits = false;
-            state.hasError = true;
-        }
+            state.failedToLoadSubreddits = true;
+          })
     }
 });
 

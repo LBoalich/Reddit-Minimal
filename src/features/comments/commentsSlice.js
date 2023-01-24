@@ -26,24 +26,25 @@ export const commentsSlice = createSlice({
         Object.assign(state.showComments, action.payload);
     }
   },
-  extraReducers:  {
-    [loadCommentsForPost.pending]: (state) => {
+  extraReducers: (builder) => {
+    builder
+      .addCase(loadCommentsForPost.pending, (state) => {
         state.isLoadingComments = true;
         state.failedToLoadComments = false;
-    },
-    [loadCommentsForPost.fulfilled]: (state, action) => {
+      })
+      .addCase(loadCommentsForPost.fulfilled, (state, action) => {
         Object.assign(state.comments, action.payload);
 
         Object.keys(action.payload).forEach(id => state.showComments[id] = true);
 
         state.isLoadingComments = false;
         state.failedToLoadComments = false;
-    },
-    [loadCommentsForPost.rejected]: (state) => {
+      })
+      .addCase(loadCommentsForPost.rejected, (state) => {
         state.isLoadingComments = false;
         state.failedToLoadComments = true;
-    }
-}
+      })
+  }
 });
 
 export const selectComments = (state) => state.comments.comments;
