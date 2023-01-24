@@ -17,8 +17,14 @@ export const commentsSlice = createSlice({
   name: 'comments',
   initialState: {
     comments: {},
+    showComments: {},
     isLoadingComments: false,
     failedToLoadComments: false
+  },
+  reducers: {
+    toggleShowComments: (state, action) => {
+        Object.assign(state.showComments, action.payload);
+    }
   },
   extraReducers:  {
     [loadCommentsForPost.pending]: (state) => {
@@ -27,6 +33,9 @@ export const commentsSlice = createSlice({
     },
     [loadCommentsForPost.fulfilled]: (state, action) => {
         Object.assign(state.comments, action.payload);
+
+        Object.keys(action.payload).forEach(id => state.showComments[id] = true);
+
         state.isLoadingComments = false;
         state.failedToLoadComments = false;
     },
@@ -38,6 +47,9 @@ export const commentsSlice = createSlice({
 });
 
 export const selectComments = (state) => state.comments.comments;
+export const selectShowComments = (state) => state.comments.showComments
 export const isLoadingComments = (state) => state.comments.isLoadingComments;
+
+export const { toggleShowComments } = commentsSlice.actions;
 
 export default commentsSlice.reducer;
