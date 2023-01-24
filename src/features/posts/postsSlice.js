@@ -1,14 +1,23 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchPosts } from "../../utilities/api";
+import { fetchPosts, fetchSubredditPosts } from "../../utilities/api";
 
 export const loadPosts = createAsyncThunk(
-    "posts/fetchPosts",
-    async () => {
-        const response = await fetchPosts();
-        const json = await response.json();
-        return json;
-    }
+  "posts/fetchPosts",
+  async () => {
+    const response = await fetchPosts();
+    const json = await response.json();
+    return json;
+  }
 );
+
+export const loadSubredditPosts = createAsyncThunk(
+  "posts/fetchSubredditPosts",
+  async (name) => {
+    const response = await fetchSubredditPosts(name);
+    const json = await response.json();
+    return json;
+  }
+)
 
 export const postsSlice = createSlice({
     name: 'posts',
@@ -29,6 +38,19 @@ export const postsSlice = createSlice({
             state.failedToLoadPosts = false;
           })
           .addCase(loadPosts.rejected, (state) => {
+            state.isLoadingPosts = false;
+            state.failedToLoadPosts = true;
+          })
+          .addCase(loadSubredditPosts.pending, (state) => {
+            state.isLoadingPosts = true;
+            state.failedToLoadPosts = false;
+          })
+          .addCase(loadSubredditPosts.fulfilled, (state, action) => {
+            state.posts = action.payload.data.children.map(post => post.data);
+            state.isLoadingPosts = false;
+            state.failedToLoadPosts = false;
+          })
+          .addCase(loadSubredditPosts.rejected, (state) => {
             state.isLoadingPosts = false;
             state.failedToLoadPosts = true;
           })

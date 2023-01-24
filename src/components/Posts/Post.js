@@ -26,7 +26,6 @@ export default function Post({ post }) {
 
   const handleOnClick = (e) => {
     e.preventDefault();
-    alert("clicked");
     if (!comments[id]) {
       dispatch(loadCommentsForPost({loadCommentsArguments}));
     } else {
