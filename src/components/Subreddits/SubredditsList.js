@@ -9,7 +9,7 @@ export default function SubredditsList({ subreddits }) {
   return (
     <ul className='subreddits-list'>
       {subreddits.map(subreddit => {
-        return <Subreddit subreddit={subreddit} />
+        return <Subreddit subreddit={subreddit} key={subreddit.display_name} />
       })}
     </ul>
   );

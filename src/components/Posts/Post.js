@@ -45,7 +45,7 @@ export default function Post({ post }) {
   };
 
   return (
-    <li key={id} className='post-container'>
+    <li className='post-container'>
         <h3 className="title">{title}</h3>
 
         {(url.endsWith(".jpg") || url.endsWith(".png") || url.endsWith(".gif")) && (

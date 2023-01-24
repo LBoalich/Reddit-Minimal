@@ -14,7 +14,7 @@ export default function Subreddit({ subreddit }) {
 
   const { name, title, img, url } = subredditObject;
   return (
-    <li key={title} className='subreddit-container'>
+    <li className='subreddit-container'>
         <img src={img} alt={`${name} icon`} className="subreddit-icon" /> {/* add on click event that changes posts to the subreddit posts */}
         <p className="subreddit-name">{name}</p>
     </li>
