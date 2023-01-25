@@ -41,7 +41,7 @@ export default function Post({ post }) {
     mediaVideo= media.reddit_video;
   };
   if (mediaVideo) {
-    mediaUrl = mediaVideo.scrubber_media_url;
+    mediaUrl = mediaVideo.fallback_url;
   };
 
   const galleryUrls = [];
@@ -58,7 +58,7 @@ export default function Post({ post }) {
             <img className="post-url" src={url} alt="url" />
         )} 
         {mediaUrl && (
-            <video className="post-media" muted controls>
+            <video className="post-media" autoPlay muted controls>
                 <source src={mediaUrl} />
             </video>
         )}
