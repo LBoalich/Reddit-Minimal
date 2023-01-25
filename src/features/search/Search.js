@@ -5,6 +5,7 @@ import {
   selectSearchTerm,
   setSearchTerm,
 } from "./searchSlice";
+import { loadSearchPosts } from "../posts/postsSlice";
 
 const searchIconUrl = 'https://static-assets.codecademy.com/Courses/Learn-Redux/Recipes-App/icons/search.svg'
 const clearIconUrl = 'https://static-assets.codecademy.com/Courses/Learn-Redux/Recipes-App/icons/clear.svg'
@@ -12,9 +13,12 @@ const clearIconUrl = 'https://static-assets.codecademy.com/Courses/Learn-Redux/R
 const Search = () => {
   const dispatch = useDispatch();
   const searchTerm = useSelector(selectSearchTerm);
+  const searchNoSpaces = searchTerm.replaceAll(" ", "+");
 
   const onSearchChangeHandler = (e) => {
+    e.preventDefault();
     dispatch(setSearchTerm(e.target.value));
+    dispatch(loadSearchPosts(searchNoSpaces));
   };
 
   const onSearchTermClearHandler = () => {

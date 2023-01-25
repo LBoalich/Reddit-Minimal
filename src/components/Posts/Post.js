@@ -17,8 +17,9 @@ export default function Post({ post }) {
     url: post.url,
     id: post.id,
     subreddit: post.subreddit,
+    mediaData: post.media_metadata,
   };
-  const { author, media, numComments, score, selftextHtml, title, url, id, subreddit } = postObject;
+  const { author, media, numComments, score, selftextHtml, title, url, id, subreddit, mediaData } = postObject;
   
   const titleNoSpecial = title.replace(/[^a-zA-Z ]/g, "");
   const titleNoSpaces = titleNoSpecial.replaceAll(" ", "_");
@@ -43,6 +44,12 @@ export default function Post({ post }) {
     mediaUrl = mediaVideo.scrubber_media_url;
   };
 
+  const galleryUrls = [];
+  if (post.is_gallery) {
+    const keys = Object.keys(mediaData);
+    keys.map(key => galleryUrls.push({[key] : (mediaData[key].p[1].u.replaceAll("amp;", ""))}));
+  };
+
   return (
     <li className='post-container'>
         <h3 className="title">{title}</h3>
@@ -54,6 +61,15 @@ export default function Post({ post }) {
             <video className="post-media" muted controls>
                 <source src={mediaUrl} />
             </video>
+        )}
+        {(galleryUrls.length > 0) && (
+            <ul className='gallery-list'>
+              {galleryUrls.map(galleryObject => {
+                const key = Object.keys(galleryObject);
+                const value = Object.values(galleryObject)
+                return <img src={value[0]} alt="url" key={key[0]}/>
+              })}
+            </ul>
         )}
         <p className="text">{selftextHtml}</p>
 
