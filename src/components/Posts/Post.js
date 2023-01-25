@@ -1,12 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleShowComments, selectShowComments, selectComments, loadCommentsForPost } from '../../features/comments/commentsSlice';
+import { toggleShowComments, selectShowComments, selectComments, loadCommentsForPost, isLoadingComments } from '../../features/comments/commentsSlice';
 import Comments from '../../features/comments/Comments';
 
 export default function Post({ post }) {
   const dispatch = useDispatch();
   const showComments = useSelector(selectShowComments);
   const comments = useSelector(selectComments);
+  const commentsAreLoading = useSelector(isLoadingComments);
   const postObject = {
     author: post.author,
     media: post.media,
@@ -51,44 +52,48 @@ export default function Post({ post }) {
   };
 
   return (
-    <li className='post-container'>
-        <h3 className="title">{title}</h3>
+    <div>
+      <li className='post-container'>
+          <h3 className="title">{title}</h3>
 
-        {(url.endsWith(".jpg") || url.endsWith(".png") || url.endsWith(".gif")) && (
-            <img className="post-url" src={url} alt="url" />
-        )} 
-        {mediaUrl && (
-            <video className="post-media" autoPlay muted controls>
-                <source src={mediaUrl} />
-            </video>
-        )}
-        {(galleryUrls.length > 0) && (
-            <ul className='gallery-list'>
-              {galleryUrls.map(galleryObject => {
-                const key = Object.keys(galleryObject);
-                const value = Object.values(galleryObject)
-                return <img src={value[0]} alt="url" key={key[0]}/>
-              })}
-            </ul>
-        )}
-        <p className="text">{selftextHtml}</p>
+          {(url.endsWith(".jpg") || url.endsWith(".png") || url.endsWith(".gif")) && (
+              <img className="post-img" src={url} alt="url" />
+          )} 
+          {mediaUrl && (
+              <video className="post-media" autoPlay muted controls>
+                  <source src={mediaUrl} />
+              </video>
+          )}
+          {(galleryUrls.length > 0) && (
+              <ul className='gallery-list'>
+                {galleryUrls.map(galleryObject => {
+                  const key = Object.keys(galleryObject);
+                  const value = Object.values(galleryObject)
+                  return <img src={value[0]} alt="url" key={key[0]}/>
+                })}
+              </ul>
+          )}
+          <p className="text">{selftextHtml}</p>
 
-        <div className="about">
-            <div className="vote">
-                <img className="upVote" src={require("./upArrow.png")} alt="up vote"/>
-                <p className="score">{score}</p>
-                <img className="downVote" src={require("./downArrow.png")} alt="down vote"/>
-            </div>
+          <div className="about">
+              <div className="vote">
+                  <img className="upVote" src={require("./upArrow.png")} alt="up vote"/>
+                  <p className="score">{score}</p>
+                  <img className="downVote" src={require("./downArrow.png")} alt="down vote"/>
+              </div>
 
-            <p className="author">Author: {author}</p>
+              <p className="author">Author: {author}</p>
 
-            <div className="comments hover" key={id} onClick={handleOnClick}>
-                <img className="comment-img" src={require("./comment.png")} alt="com"/>
-                <p className="num-comments">{numComments}</p>
-            </div>
-        </div>
-
-        <Comments id={id}/>
-    </li>
+              <div className="comments hover" key={id} onClick={handleOnClick}>
+                  <img className="comment-img" src={require("./comment.png")} alt="com"/>
+                  <p className="num-comments">{numComments}</p>
+              </div>
+          </div>
+      </li>
+      {(commentsAreLoading) && (
+      <div style={{color: "whitesmoke", paddingBottom: 20}}>Loading Comments</div>
+      )}
+      <Comments id={id}/>
+    </div>
   );
 }
