@@ -82,7 +82,7 @@ export default function Post({ post }) {
 
             <p className="author">Author: {author}</p>
 
-            <div className="comments" key={id} onClick={handleOnClick}>
+            <div className="comments hover" key={id} onClick={handleOnClick}>
                 <img className="comment-img" src={require("./comment.png")} alt="com"/>
                 <p className="num-comments">{numComments}</p>
             </div>
