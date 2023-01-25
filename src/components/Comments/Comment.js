@@ -11,7 +11,7 @@ export default function Comment({ comment }) {
   const { author, body, score, id } = commentObject;
 
   return (
-    <li key={id} className='comment-container'>
+    <li className='comment-container'>
       <span className="comment-body">{body}</span>
       <div className="comment-info">
         <p>Author: {author}</p>
