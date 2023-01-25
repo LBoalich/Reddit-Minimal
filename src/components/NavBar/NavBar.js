@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { debounce } from '../../utilities/helpers';
 import Search from "../../features/search/Search";
+import { loadPosts } from '../../features/posts/postsSlice';
 
 const Navbar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const dispatch = useDispatch();
 
   const handleScroll = debounce(() => {
     const currentScrollPos = window.pageYOffset;
@@ -21,6 +24,11 @@ const Navbar = () => {
 
   }, [prevScrollPos, visible, handleScroll]);
 
+  const handleOnClick = (e) => {
+    e.preventDefault();
+    dispatch(loadPosts());
+  };  
+
   const navbarStyles = {
     position: 'fixed',
     height: '50px',
@@ -34,11 +42,11 @@ const Navbar = () => {
     <div style={{ ...navbarStyles, top: visible ? '0' : '-50px' }}>
       <nav className="navbar">
         <div className="home">
-          <a href="">redditMinimal</a> {/* add href link so returns to home state */}
+          <p className="hover" onClick={handleOnClick}>redditMinimal</p> 
         </div>
         <Search />
         <div className="logo">
-          <img src="" alt="" /> {/* add reddit logo.  On click returns to home */}
+          <img src={require("./NavBar.png")} alt="" className="logo-img hover" onClick={handleOnClick}/>
         </div>
       </nav>
     </div>
