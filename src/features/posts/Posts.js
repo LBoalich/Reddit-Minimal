@@ -16,7 +16,7 @@ const Posts = () => {
     dispatch(loadPosts());
   }, [dispatch]);
  
-  if (postsAreLoading) return <div>Loading Posts</div>;
+  if (postsAreLoading) return <div className="loading">Loading Posts</div>;
 
   return (
     <div className='posts-container'>

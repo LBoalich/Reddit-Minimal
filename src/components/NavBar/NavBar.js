@@ -41,8 +41,8 @@ const Navbar = () => {
   return (
     <div style={{ ...navbarStyles, top: visible ? '0' : '-50px' }}>
       <nav className="navbar">
-        <div className="home">
-          <p className="hover" onClick={handleOnClick}>redditMinimal</p> 
+        <div className="home hover" onClick={handleOnClick}>
+          <span className="home-reddit">reddit</span><span className="home-fun">BOARD</span>
         </div>
         <Search />
         <div className="logo">

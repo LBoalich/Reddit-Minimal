@@ -16,7 +16,7 @@ const Subreddits = () => {
     dispatch(loadSubreddits());
   }, [dispatch]);
  
-  if (subredditsAreLoading) return <div>Loading Subreddits</div>;
+  if (subredditsAreLoading) return <div className="loading">Loading Subreddits</div>;
 
   return (
     <div className='subreddits-container'>

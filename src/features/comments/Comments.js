@@ -14,7 +14,6 @@ const Comments = ({id}) => {
 
   return (
     <div className='comments-container' style={{display:commentDisplay}}>
-      <h3 className='comments-title'>Comments</h3>
       <CommentsList comments={comments[id]} />
     </div>
   );

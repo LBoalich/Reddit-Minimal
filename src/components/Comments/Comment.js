@@ -14,8 +14,7 @@ export default function Comment({ comment }) {
     <li className='comment-container'>
       <span className="comment-body">{body}</span>
       <div className="comment-info">
-        <p>Author: {author}</p>
-        <p>Score: {score}</p>
+        <p>{author}</p>
       </div>
     </li>
   );

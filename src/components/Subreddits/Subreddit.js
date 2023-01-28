@@ -17,13 +17,13 @@ export default function Subreddit({ subreddit }) {
 
   const handleOnClick = (e) => {
     e.preventDefault();
-    alert("clicked");
     dispatch(loadSubredditPosts(name));
+    window.scrollTo(0, 0);
   }
 
   return (
-    <li className='subreddit-container'>
-        <img src={img} alt={`${name} icon`} className="subreddit-icon hover" onClick={handleOnClick} /> {/* add on click event that changes posts to the subreddit posts */}
+    <li className='subreddit-container hover' onClick={handleOnClick} >
+        <img src={img} alt={`${name} icon`} className="subreddit-icon" /> 
         <p className="subreddit-name">{name}</p>
     </li>
   );
