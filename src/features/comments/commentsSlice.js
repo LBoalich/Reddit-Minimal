@@ -50,6 +50,7 @@ export const commentsSlice = createSlice({
 export const selectComments = (state) => state.comments.comments;
 export const selectShowComments = (state) => state.comments.showComments
 export const isLoadingComments = (state) => state.comments.isLoadingComments;
+export const failedToLoadComments = (state) => state.comments.failedToLoadComments;
 
 export const { toggleShowComments } = commentsSlice.actions;
 

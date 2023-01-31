@@ -37,6 +37,7 @@ export const subredditsSlice = createSlice({
 
 export const selectSubreddits = (state) => state.subreddits.subreddits;
 export const isLoadingSubreddits = (state) => state.subreddits.isLoadingSubreddits;
+export const failedToLoadSubreddits = (state) => state.subreddits.failedToLoadSubreddits;
 
 export default subredditsSlice.reducer;
       

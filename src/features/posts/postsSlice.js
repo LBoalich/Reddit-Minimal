@@ -80,8 +80,8 @@ export const postsSlice = createSlice({
 });
 
 export const selectPosts = (state) => state.posts.posts;
-export const isLoadingPosts = (state) => state.posts.isLoading;
-
+export const isLoadingPosts = (state) => state.posts.isLoadingPosts;
+export const failedToLoadPosts= (state) => state.posts.failedToLoadPosts;
 
 export default postsSlice.reducer;
       

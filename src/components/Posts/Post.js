@@ -1,13 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleShowComments, selectShowComments, selectComments, loadCommentsForPost, isLoadingComments } from '../../features/comments/commentsSlice';
+import { toggleShowComments, selectShowComments, selectComments, loadCommentsForPost } from '../../features/comments/commentsSlice';
 import Comments from '../../features/comments/Comments';
 
 export default function Post({ post }) {
   const dispatch = useDispatch();
   const showComments = useSelector(selectShowComments);
   const comments = useSelector(selectComments);
-  const commentsAreLoading = useSelector(isLoadingComments);
   const postObject = {
     author: post.author,
     media: post.media,
@@ -21,8 +20,9 @@ export default function Post({ post }) {
     mediaData: post.media_metadata,
     preview: post.preview,
     hint: post.post_hint,
+    gallery: post.is_gallery,
   };
-  const { author, media, numComments, score, selftextHtml, title, url, id, subreddit, mediaData, preview, hint } = postObject;
+  const { author, media, numComments, score, selftextHtml, title, url, id, subreddit, mediaData, preview, hint, gallery } = postObject;
   
   const titleNoSpecial = title.replace(/[^a-zA-Z ]/g, "");
   const titleNoSpaces = titleNoSpecial.replaceAll(" ", "_");
@@ -38,34 +38,140 @@ export default function Post({ post }) {
     }
   };
 
-  let mediaVideo;
   let mediaUrl;
+  let isMedia = false;
   if (media) {
-    mediaVideo= media.reddit_video;
-  };
-  if (mediaVideo) {
-    mediaUrl = mediaVideo.fallback_url;
+    try {
+      const mediaVideo = media.reddit_video;
+      mediaUrl = mediaVideo.fallback_url;
+      isMedia = true;
+    } catch {
+        //Useing try...catch because json structure not always the same for media.  If not in above format will make entire page not render. No catch needed because switch statement below makes sure media will not render if mediaUrl not found.  
+    }
   };
 
-  let previewData;
-  let previewUrl;
+  let isText;
+  selftextHtml ? isText = true : isText = false;
+
+  let isPicture;
+  (url.endsWith(".jpg") || url.endsWith(".png") || url.endsWith(".gif")) ? isPicture = true : isPicture = false;
+
+  let youTubePreview;
+  let isYoutube;
+  url.includes("youtu.be") ? isYoutube = true : isYoutube = false;
   if (preview) {
-    previewData = preview.reddit_video_preview;
+    try {
+      const youTubePreviewData = preview.images;
+      youTubePreview = youTubePreviewData[0].source.url.replaceAll("amp;", "");
+    } catch {
+        youTubePreview = require("./backUp.jpg");
+    }
   };
-  if (previewData) {
-    previewUrl = previewData.fallback_url;
+
+  let previewUrl;
+  let isPreview = false;
+  if (preview) {
+    try {
+      const previewData = preview.reddit_video_preview;
+      previewUrl = previewData.fallback_url;
+      isPreview = true;
+    } catch {
+        //Useing try...catch because json structure not always the same for preview.  If not in above format will make entire page not render. No catch needed because switch statement below makes sure preview will not render if previewUrl not found.  
+      }
   };
 
   let linkUrl;
+  let isLink = false;
   if (hint === "link") {
-    linkUrl = post.preview.images[0].source.url.replaceAll("amp;", "");
+    try {
+      linkUrl = post.preview.images[0].source.url.replaceAll("amp;", "");
+      isLink = true;
+    } catch {
+        linkUrl = require("./backUp.jpg");
+        isLink = true;
+    }
   };
 
   const galleryUrls = [];
-  if (post.is_gallery) {
-    const keys = Object.keys(mediaData);
-    keys.map(key => galleryUrls.push({[key] : (mediaData[key].p[1].u.replaceAll("amp;", ""))}));
+  let isGallery = false;
+  if (gallery) {
+    try{
+      const keys = Object.keys(mediaData);
+      keys.map(key => galleryUrls.push({[key] : (mediaData[key].p[1].u.replaceAll("amp;", ""))}));
+      isGallery = true;
+    } catch {
+        //Useing try...catch because json structure not always the same for gallery.  If not in above format will make entire page not render. No catch needed because switch statement below makes sure gallery will not render if galleryUrls not found. 
+    }
   };
+
+  const mediaType = {
+    video: isMedia,
+    previewVideo: isPreview,
+    picture: isPicture,
+    link: isLink,
+    pictureGallery: isGallery,
+    youTube: isYoutube,
+    text: isText,
+  };
+
+  const getKeyByValue = (object, value) => {
+    return Object.keys(object).find(key => object[key] === value);
+  }
+
+  const polaroidMedia = () => {
+    switch (getKeyByValue(mediaType, true)) {
+      case "video":
+        return (
+          <video className="post-media" autoPlay muted controls loop>
+            <source src={mediaUrl} />
+          </video>
+        );
+
+      case "previewVideo":
+        return (
+          <video className="post-media" autoPlay muted controls loop>
+            <source src={previewUrl} />
+          </video>
+        );
+
+      case "picture":
+        return <img className="post-img" src={url} alt="url" />;
+
+      case "link":
+        return (
+          <div className="link">
+            <img src={linkUrl} className="post-img" alt="url" />
+            <a href={url} className="link-url" target="_blank" rel="noopener noreferrer">{url}</a>
+          </div>
+        );
+      
+      case "pictureGallery":
+        return (
+          <ul className='gallery-list'>
+            {galleryUrls.map(galleryObject => {
+              const key = Object.keys(galleryObject);
+              const value = Object.values(galleryObject)
+              return <img src={value[0]} alt="url" key={key[0]}/>
+            })}
+          </ul>
+        );
+
+      case "youTube":
+        const youTubeUrl = url.replaceAll("amp;", "");
+        return (
+          <div className="link">
+            <img src={youTubePreview} className="post-img" alt="url" />
+            <a href={youTubeUrl} className="link-url" target="_blank" rel="noopener noreferrer">{youTubeUrl}</a>
+          </div>
+        );
+        
+      case "text":
+        return <p className="text">{selftextHtml}</p>;
+        
+      default:
+        return <img src={require("./backUp.jpg")} className="post-img"/>;
+  }};
+  
 
   return (
     <div>
@@ -74,42 +180,9 @@ export default function Post({ post }) {
 
           <div className="post-polaroid">
             <img className="tape" src={require("./tape.png")}/>
-            <div className="post-polaroid-media">
-              {(url.endsWith(".jpg") || url.endsWith(".png") || url.endsWith(".gif")) && (
-                <img className="post-img" src={url} alt="url" />
-              )} 
-              {mediaUrl && (
-                <video className="post-media" autoPlay muted controls loop>
-                    <source src={mediaUrl} />
-                </video>
-              )}
-              {previewUrl && (
-                <video className="post-media" autoPlay muted controls>
-                  <source src={previewUrl} />
-                </video>
-              )}
-              {(galleryUrls.length > 0) && (
-                <ul className='gallery-list'>
-                  {galleryUrls.map(galleryObject => {
-                    const key = Object.keys(galleryObject);
-                    const value = Object.values(galleryObject)
-                    return <img src={value[0]} alt="url" key={key[0]}/>
-                  })}
-                </ul>
-              )}
-              {(hint === "link" && !previewUrl) && (
-                <div className="link">
-                  <img src={linkUrl} className="post-img" alt="url" />
-                  <a href={url} className="link-url">{url}</a>
-                </div>
-              )}
-              {(!(hint === "link" && !previewUrl) && !(galleryUrls.length > 0) && !mediaUrl && !previewUrl && !(url.endsWith(".jpg") || url.endsWith(".png") || url.endsWith(".gif")) && selftextHtml) && (
-                <p className="text">{selftextHtml}</p>
-              )}
-              {(!(hint === "link" && !previewUrl) && !(galleryUrls.length > 0) && !mediaUrl && !previewUrl && !(url.endsWith(".jpg") || url.endsWith(".png") || url.endsWith(".gif")) && !selftextHtml) && (
-                <img src={require("./backUp.jpg")} className="post-img"/>
-              )}
 
+            <div className="post-polaroid-media">
+              {polaroidMedia()}
             </div>
 
             <div className="about">
@@ -132,9 +205,6 @@ export default function Post({ post }) {
             </div>
           </div>
       </li>
-      {(commentsAreLoading) && (
-      <div className="loading" style={{color: "whitesmoke", paddingBottom: 20}}>Loading Comments</div>
-      )}
       <Comments id={id}/>
     </div>
   );
