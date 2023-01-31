@@ -16,7 +16,7 @@ const Comments = ({id}) => {
  
   const commentDisplay = showComments[id] ? "block" : "none";
 
-  if (commentsAreLoading) return <div className="loading">Loading Posts</div>;
+  if (commentsAreLoading) return <div className="loading">Loading Comments</div>;
 
   if(commentsFailed) return alert("Site Error.  Please Refresh");
 

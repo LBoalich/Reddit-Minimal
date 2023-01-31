@@ -17,6 +17,7 @@ const Search = () => {
 
   const onSearchChangeHandler = (e) => {
     e.preventDefault();
+    window.scrollTo(0, 0);
     dispatch(setSearchTerm(e.target.value));
     dispatch(loadSearchPosts(searchNoSpaces));
   };

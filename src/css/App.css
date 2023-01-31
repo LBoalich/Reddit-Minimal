@@ -366,7 +366,7 @@ html {
 }
 
 .subreddits-container {
-  flex-basis: 22%;
+  flex-basis: 21%;
   height:auto;
   padding: 20px;
   margin: 0 30px 0 15px;
