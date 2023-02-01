@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { debounce } from '../../utilities/helpers';
 import Search from "../../features/search/Search";
 import { loadPosts } from '../../features/posts/postsSlice';
+import { useViewport } from '../../utilities/ViewPort';
+import Subreddits from '../../features/subreddits/Subreddits';
+import { showSubreddits, toggleShowSubreddits } from '../../features/subreddits/subredditsSlice';
 
 const Navbar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const subredditsVisable = useSelector(showSubreddits);
   const dispatch = useDispatch();
+  const { width } = useViewport();
+  const breakpoint = 770;
 
   const handleScroll = debounce(() => {
     const currentScrollPos = window.pageYOffset;
@@ -26,8 +32,17 @@ const Navbar = () => {
 
   const handleOnClick = (e) => {
     e.preventDefault();
+    window.scrollTo(0, 0);
     dispatch(loadPosts());
   };  
+
+
+  const handleSubredditsClick = (e) => {
+    e.preventDefault();
+    const newSubredditsVisability = subredditsVisable ? false : true;
+    dispatch(toggleShowSubreddits(newSubredditsVisability)); 
+  };
+
 
   const navbarStyles = {
     position: 'fixed',
@@ -38,7 +53,20 @@ const Navbar = () => {
     transition: 'top 500ms'
   }
 
-  return (
+  const MobileComponent = () => (
+    <div style={{ ...navbarStyles, top: visible ? '0' : '-50px' }}>
+      <nav className="navbar">
+        <button className="subreddits-button hover" onClick={handleSubredditsClick}>
+          Subreddits
+        </button>
+        <div className="logo">
+          <img src={require("./NavBar.png")} alt="" className="logo-img hover" onClick={handleOnClick}/>
+        </div>
+        <Search />
+      </nav>
+    </div>
+  );
+  const DesktopComponent = () => (
     <div style={{ ...navbarStyles, top: visible ? '0' : '-50px' }}>
       <nav className="navbar">
         <div className="home hover" onClick={handleOnClick}>
@@ -51,6 +79,8 @@ const Navbar = () => {
       </nav>
     </div>
   );
+
+  return width < breakpoint ? <MobileComponent /> : <DesktopComponent />;
 };
 
 export default Navbar;

@@ -151,7 +151,7 @@ export default function Post({ post }) {
             {galleryUrls.map(galleryObject => {
               const key = Object.keys(galleryObject);
               const value = Object.values(galleryObject)
-              return <img src={value[0]} alt="url" key={key[0]}/>
+              return <img className="post-img"src={value[0]} alt="url" key={key[0]}/>
             })}
           </ul>
         );

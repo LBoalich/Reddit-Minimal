@@ -22,7 +22,7 @@ const Comments = ({id}) => {
 
   return (
     <div className='comments-container' style={{display:commentDisplay}}>
-      <CommentsList comments={comments[id]} />
+      <CommentsList comments={comments[id]} commentsId={id}/>
     </div>
   );
 };

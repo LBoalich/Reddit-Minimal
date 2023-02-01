@@ -14,8 +14,14 @@ export const subredditsSlice = createSlice({
     name: 'subreddits',
     initialState: {
         subreddits: [],
+        showSubreddits: false,
         isLoadingSubreddits: false,
-        failedToLoadSubreddits: false
+        failedToLoadSubreddits: false,
+    },
+    reducers: {
+      toggleShowSubreddits: (state, action) => {
+          state.showSubreddits = action.payload;
+      }
     },
     extraReducers: (builder) => {
         builder
@@ -38,6 +44,9 @@ export const subredditsSlice = createSlice({
 export const selectSubreddits = (state) => state.subreddits.subreddits;
 export const isLoadingSubreddits = (state) => state.subreddits.isLoadingSubreddits;
 export const failedToLoadSubreddits = (state) => state.subreddits.failedToLoadSubreddits;
+export const showSubreddits = (state) => state.subreddits.showSubreddits;
+
+export const { toggleShowSubreddits } = subredditsSlice.actions;
 
 export default subredditsSlice.reducer;
       

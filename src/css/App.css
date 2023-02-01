@@ -196,14 +196,14 @@ html {
 .post-img {
   height: auto;
   max-width: 90%;
-  height: auto;
   padding: 15px;
   max-height: 400px;
 }
 
 .gallery-list {
-  padding: 15px;
+  margin: 15px;
   max-width: 90%;
+  padding: 15px;
 }
 
 .link {
@@ -328,7 +328,7 @@ html {
 .comment-container {
   display: flex;
   flex-direction: column;
-  background-image: url(./paper.png);
+  background-image: url(./paper2.jpeg);
   background-size: cover;
   margin-bottom: 20px;
   justify-content: center;
@@ -337,26 +337,38 @@ html {
   max-width: 450px;
 }
 
+.close-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.close-button {
+  margin: 5px 5px;
+  width: 25px;
+  height: auto;
+}
+
 .comment-body {
   word-wrap: break-word;
   white-space: pre-wrap;
   word-break: break-word;
   color: #0D0D0D;
   font-weight: 400;
-  width: 70%;
-  margin-top: 15%;
+  width: 80%;
+  margin-top: 1%;
   text-align: left;
   font-family: 'Reenie Beanie', cursive;
   font-size: 30px;
 }
 
 .comment-info {
-  width: 70%;
+  width: 100%;
 }
 
 .comment-info p {
   font-weight: 500;
-  margin: 5% 0 25% 0;
+  margin: 5% 7% 7% 25%;
   font-family: 'Sassy Frass', cursive;
   font-size: 40px;
   text-align: end;
@@ -420,4 +432,66 @@ html {
   color: #5FBBED;
   font-family: 'Crafty Girls', cursive;
   font-weight: 300;
+}
+
+@media only screen and (max-width: 770px) {
+  .posts-container {
+    max-width: 100%;
+    padding: 0;
+    margin: 0 0 0 30px;
+  }
+
+  .post-container{
+    margin: 0;
+  }
+
+  .post-img {
+    padding: 2px;
+  }
+
+  .post-media {
+    padding: 2px;
+  }
+
+  .gallery-list {
+    padding: 2px;
+  }
+
+  .comment-container {
+    width: 80%;
+  }
+
+  .subreddits-button {
+    background-color: #FEF7DB;
+    font-family: 'Gloria Hallelujah', cursive;
+    max-width: 45%;
+    width: 40%;
+    margin: 10px;
+    height: 75%;
+    border-radius: 16.5px;
+    border: solid 1px #141c3a;
+    font-size: 16px;
+    text-align: start;
+    padding-left: 15px;
+    color: rgba(0, 0, 0, .6)
+  }
+
+  .logo {
+    padding: 0 5px 0 5px;
+    justify-content: center;
+  }
+
+  #search-container {
+    padding-right: 10px;
+    max-width: 45%;
+    width: 40%;
+  }
+
+  .features {
+    justify-content: center;
+  }
+
+  .subreddits-container {
+    margin: 0;
+  }
 }

@@ -11,3 +11,15 @@ export const Button = styled.div`
     cursor: pointer;
     color: #F2C5C4;
 `
+
+export const MobileButton = styled.div`
+    position: fixed;
+    width: 100%;
+    bottom: 25px;
+    left 3px;
+    height: 20px;
+    font-size: 2rem;
+    z-index: 1;
+    cursor: pointer;
+    color: #F2C5C4;
+`

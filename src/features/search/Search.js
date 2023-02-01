@@ -6,6 +6,7 @@ import {
   setSearchTerm,
 } from "./searchSlice";
 import { loadSearchPosts } from "../posts/postsSlice";
+import { toggleShowSubreddits } from "../subreddits/subredditsSlice";
 
 const searchIconUrl = 'https://static-assets.codecademy.com/Courses/Learn-Redux/Recipes-App/icons/search.svg'
 const clearIconUrl = 'https://static-assets.codecademy.com/Courses/Learn-Redux/Recipes-App/icons/clear.svg'
@@ -18,6 +19,7 @@ const Search = () => {
   const onSearchChangeHandler = (e) => {
     e.preventDefault();
     window.scrollTo(0, 0);
+    dispatch(toggleShowSubreddits(false));
     dispatch(setSearchTerm(e.target.value));
     dispatch(loadSearchPosts(searchNoSpaces));
   };

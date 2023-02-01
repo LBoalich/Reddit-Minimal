@@ -1,7 +1,7 @@
 import React from 'react';
 import Comment from "./Comment";
 
-export default function CommentsList({ comments }) {
+export default function CommentsList({ comments, commentsId }) {
   if (!comments) {
     return null;
   };
@@ -11,7 +11,7 @@ export default function CommentsList({ comments }) {
   return (
     <ul className='comments-list' >
       {commentsSlice.map((comment) => {
-        return <Comment comment={comment} key={comment.id}/>
+        return <Comment comment={comment} commentsId={commentsId}key={comment.id}/>
       })}
     </ul>
   );
