@@ -5,7 +5,8 @@ import {
   selectSubreddits,
   isLoadingSubreddits,
   showSubreddits,
-  toggleShowSubreddits
+  toggleShowSubreddits,
+  failedToLoadSubreddits,
 } from "./subredditsSlice";
 import SubredditsList from "../../components/Subreddits/SubredditsList";
 import { useViewport } from '../../utilities/ViewPort';
@@ -15,12 +16,15 @@ const Subreddits = () => {
   const subreddits = useSelector(selectSubreddits);
   const subredditsAreLoading = useSelector(isLoadingSubreddits);
   const subredditsVisable = useSelector(showSubreddits);
+  const subredditsFailed = useSelector(failedToLoadSubreddits)
   const { width } = useViewport();
   const breakpoint = 770;
 
   useEffect(() => {
     dispatch(loadSubreddits());
   }, [dispatch]);
+
+  if (subredditsFailed) return alert("Error loading subreddits data");
 
   const handleSubredditsClick = (e) => {
     e.preventDefault();
@@ -32,14 +36,14 @@ const Subreddits = () => {
     if (subredditsVisable) {
       return (
         <div className='subreddits-container hover' onClick={handleSubredditsClick}>
-      {subredditsAreLoading ? <div className="loading">Loading Subreddits</div> : null}
-      <h3 className='subreddits-title'>Subreddits</h3>
-      <SubredditsList subreddits={subreddits} />
-    </div>
+          {subredditsAreLoading ? <div className="loading">Loading Subreddits</div> : null}
+          <h3 className='subreddits-title'>Subreddits</h3>
+          <SubredditsList subreddits={subreddits} />
+        </div>
       );
     } else {
-      return null;
-    }
+        return null;
+      }
   };
   const DesktopComponent = () => (
     <div className='subreddits-container'>

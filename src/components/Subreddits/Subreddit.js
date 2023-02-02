@@ -17,9 +17,9 @@ export default function Subreddit({ subreddit }) {
 
   const handleOnClick = (e) => {
     e.preventDefault();
-    dispatch(loadSubredditPosts(name));
     window.scrollTo(0, 0);
-  }
+    dispatch(loadSubredditPosts(name));
+  };
 
   return (
     <li className='subreddit-container hover' onClick={handleOnClick} >
@@ -27,4 +27,4 @@ export default function Subreddit({ subreddit }) {
         <p className="subreddit-name">{name}</p>
     </li>
   );
-}
+};

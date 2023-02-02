@@ -11,7 +11,7 @@ export default function CommentsList({ comments, commentsId }) {
   return (
     <ul className='comments-list' >
       {commentsSlice.map((comment) => {
-        return <Comment comment={comment} commentsId={commentsId}key={comment.id}/>
+        return <Comment comment={comment} commentsId={commentsId} key={comment.id}/>
       })}
     </ul>
   );

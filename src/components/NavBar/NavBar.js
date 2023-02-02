@@ -4,7 +4,6 @@ import { debounce } from '../../utilities/helpers';
 import Search from "../../features/search/Search";
 import { loadPosts } from '../../features/posts/postsSlice';
 import { useViewport } from '../../utilities/ViewPort';
-import Subreddits from '../../features/subreddits/Subreddits';
 import { showSubreddits, toggleShowSubreddits } from '../../features/subreddits/subredditsSlice';
 
 const Navbar = () => {
@@ -36,13 +35,11 @@ const Navbar = () => {
     dispatch(loadPosts());
   };  
 
-
   const handleSubredditsClick = (e) => {
     e.preventDefault();
     const newSubredditsVisability = subredditsVisable ? false : true;
     dispatch(toggleShowSubreddits(newSubredditsVisability)); 
   };
-
 
   const navbarStyles = {
     position: 'fixed',

@@ -1,16 +1,13 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleShowComments, selectShowComments } from '../../features/comments/commentsSlice';
+import { useDispatch } from 'react-redux';
+import { toggleShowComments } from '../../features/comments/commentsSlice';
 
 export default function Comment({ comment, commentsId }) {
   const dispatch = useDispatch();
-  const showComments = useSelector(selectShowComments);
 
   const commentObject = {
     author: comment.author,
     body: comment.body,
-    score: comment.score,
-    id: comment.id,
   };
 
   const handleOnClick = (e) => {
@@ -18,7 +15,7 @@ export default function Comment({ comment, commentsId }) {
     dispatch(toggleShowComments({[commentsId] : false}));
   };
 
-  const { author, body, score, id } = commentObject;
+  const { author, body } = commentObject;
 
   return (
     <li className='comment-container'>

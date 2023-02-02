@@ -25,7 +25,7 @@ const Posts = () => {
  
   if (postsAreLoading) return <div className="loading">Loading Posts</div>;
 
-  if(postsFailed) return alert("Site Error.  Please Refresh");
+  if (postsFailed) return alert("Error loading posts data");
 
   const MobileComponent = () => {
     if (subredditsVisable) {

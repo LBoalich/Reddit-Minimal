@@ -18,7 +18,7 @@ const Comments = ({id}) => {
 
   if (commentsAreLoading) return <div className="loading">Loading Comments</div>;
 
-  if(commentsFailed) return alert("Site Error.  Please Refresh");
+  if(commentsFailed) return alert("Error loading comments data");
 
   return (
     <div className='comments-container' style={{display:commentDisplay}}>
