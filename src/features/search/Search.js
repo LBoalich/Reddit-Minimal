@@ -8,8 +8,8 @@ import {
 import { loadSearchPosts } from "../posts/postsSlice";
 import { toggleShowSubreddits } from "../subreddits/subredditsSlice";
 
-const searchIconUrl = 'https://static-assets.codecademy.com/Courses/Learn-Redux/Recipes-App/icons/search.svg'
-const clearIconUrl = 'https://static-assets.codecademy.com/Courses/Learn-Redux/Recipes-App/icons/clear.svg'
+const searchIconUrl = require("./searchIcon.png");
+const clearIconUrl = require("../../components/Comments/closeButton2.png");
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const Search = () => {
           type="button"
           id="search-clear-button"
         >
-          <img src={clearIconUrl} alt="clear search button" />
+          <img src={clearIconUrl} alt="clear search button" className="clear-search-img"/>
         </button>
       )}
     </div>
