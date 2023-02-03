@@ -131,12 +131,12 @@ export default function Post({ post }) {
         );
 
       case "picture":
-        return <img className="post-img" src={url} alt="Post Picture" />;
+        return <img className="post-img" src={url} alt="Post" />;
 
       case "link":
         return (
           <section className="link">
-            <img src={linkUrl} className="post-img" alt="Post Picture" />
+            <img src={linkUrl} className="post-img" alt="Post" />
             <a href={url} className="link-url" target="_blank" rel="noopener noreferrer">{url}</a>
           </section>
         );
@@ -147,7 +147,7 @@ export default function Post({ post }) {
             {galleryUrls.map(galleryObject => {
               const key = Object.keys(galleryObject);
               const value = Object.values(galleryObject)
-              return <img className="post-img"src={value[0]} alt="Post Picture" key={key[0]}/>
+              return <img className="post-img"src={value[0]} alt="Post" key={key[0]}/>
             })}
           </ul>
         );
@@ -156,7 +156,7 @@ export default function Post({ post }) {
         const youTubeUrl = url.replaceAll("amp;", "");
         return (
           <section className="link">
-            <img src={youTubePreview} className="post-img" alt="Post Picture" />
+            <img src={youTubePreview} className="post-img" alt="Post" />
             <a href={youTubeUrl} className="link-url" target="_blank" rel="noopener noreferrer">{youTubeUrl}</a>
           </section>
         );
