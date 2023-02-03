@@ -22,8 +22,6 @@ const Posts = () => {
   useEffect(() => {
     dispatch(loadPosts());
   }, [dispatch]);
- 
-  if (postsAreLoading) return <div className="loading">Loading Posts</div>;
 
   if (postsFailed) return alert("Error loading posts data");
 
@@ -32,16 +30,22 @@ const Posts = () => {
       return null;
     } else {
       return (
-        <div className='posts-container'>
+        <section className='posts-container'>
+          {postsAreLoading && (
+            <h1 className="loading">Loading Posts</h1>
+          )}
           <PostsList posts={posts} />
-        </div>
+        </section>
       )
     }
   };
   const DesktopComponent = () => (
-    <div className='posts-container'>
+    <section className='posts-container'>
+      {postsAreLoading && (
+        <h1 className="loading">Loading Posts</h1>
+      )}
       <PostsList posts={posts} />
-    </div>
+    </section>
   );
 
   return width < breakpoint ? <MobileComponent /> : <DesktopComponent />;

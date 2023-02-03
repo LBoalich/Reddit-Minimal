@@ -30,7 +30,7 @@ const Search = () => {
 
   return (
     <div id="search-container">
-      <img id="search-icon" alt="" src={searchIconUrl} />
+      <img id="search-icon" alt="search icon" src={searchIconUrl} />
       <input
         id="search"
         type="text"
@@ -44,7 +44,7 @@ const Search = () => {
           type="button"
           id="search-clear-button"
         >
-          <img src={clearIconUrl} alt="" />
+          <img src={clearIconUrl} alt="clear search button" />
         </button>
       )}
     </div>

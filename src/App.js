@@ -10,14 +10,12 @@ function App() {
   
   return (
     <ViewportProvider>
-      <div className="App">
-        <Navbar />
-        <div className="features" >
-          <Posts />
-          <Subreddits />
-          <ScrollButton />
-        </div>
-      </div>
+      <Navbar />
+      <main className="features" >
+        <Posts />
+        <Subreddits />
+        <ScrollButton />
+      </main>
     </ViewportProvider>
   );
 }

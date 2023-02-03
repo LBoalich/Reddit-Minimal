@@ -19,13 +19,15 @@ export default function Comment({ comment, commentsId }) {
 
   return (
     <li className='comment-container'>
-      <div className="close-container">
-        <img className="close-button hover" onClick={handleOnClick} src={require("./closeButton2.png")} />
-      </div>
-      <span className="comment-body">{body}</span>
-      <div className="comment-info">
-        <p>{author}</p>
-      </div>
+      <article className="comment-article">
+        <div className="close-container">
+          <img className="close-button hover" onClick={handleOnClick} src={require("./closeButton2.png")} alt="Close comments button"/>
+        </div>
+        <p className="comment-body">{body}</p>
+        <footer className="comment-info">
+          <p>{author}</p>
+        </footer>
+      </article>
     </li>
   );
 }

@@ -51,17 +51,17 @@ const Navbar = () => {
   }
 
   const MobileComponent = () => (
-    <div style={{ ...navbarStyles, top: visible ? '0' : '-50px' }}>
+    <header style={{ ...navbarStyles, top: visible ? '0' : '-50px' }}>
       <nav className="navbar">
-        <button className="subreddits-button hover" onClick={handleSubredditsClick}>
+        <button className="subreddits-button hover" onClick={handleSubredditsClick} type="button">
           Subreddits
         </button>
         <div className="logo">
-          <img src={require("./NavBar.png")} alt="" className="logo-img hover" onClick={handleOnClick}/>
+          <img src={require("./NavBar.png")} alt="Return to Home button" className="logo-img hover" onClick={handleOnClick}/>
         </div>
         <Search />
       </nav>
-    </div>
+    </header>
   );
   const DesktopComponent = () => (
     <div style={{ ...navbarStyles, top: visible ? '0' : '-50px' }}>
@@ -71,7 +71,7 @@ const Navbar = () => {
         </div>
         <Search />
         <div className="logo">
-          <img src={require("./NavBar.png")} alt="" className="logo-img hover" onClick={handleOnClick}/>
+          <img src={require("./NavBar.png")} alt="Return to Home button" className="logo-img hover" onClick={handleOnClick}/>
         </div>
       </nav>
     </div>

@@ -21,9 +21,12 @@ const Comments = ({id}) => {
   if(commentsFailed) return alert("Error loading comments data");
 
   return (
-    <div className='comments-container' style={{display:commentDisplay}}>
+    <section className='comments-container' style={{display:commentDisplay}}>
+      {commentsAreLoading && (
+        <h1 className="loading">Loading Comments</h1>
+      )}
       <CommentsList comments={comments[id]} commentsId={id}/>
-    </div>
+    </section>
   );
 };
 

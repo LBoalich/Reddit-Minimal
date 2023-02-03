@@ -122,27 +122,23 @@ export default function Post({ post }) {
     switch (getKeyByValue(mediaType, true)) {
       case "video":
         return (
-          <video className="post-media" autoPlay muted controls loop>
-            <source src={mediaUrl} />
-          </video>
+          <video className="post-media" autoPlay muted controls loop src={mediaUrl}>Video not supported</video>
         );
 
       case "previewVideo":
         return (
-          <video className="post-media" autoPlay muted controls loop>
-            <source src={previewUrl} />
-          </video>
+          <video className="post-media" autoPlay muted controls loop src={previewUrl}>Video not supported</video>
         );
 
       case "picture":
-        return <img className="post-img" src={url} alt="url" />;
+        return <img className="post-img" src={url} alt="Post Picture" />;
 
       case "link":
         return (
-          <div className="link">
-            <img src={linkUrl} className="post-img" alt="url" />
+          <section className="link">
+            <img src={linkUrl} className="post-img" alt="Post Picture" />
             <a href={url} className="link-url" target="_blank" rel="noopener noreferrer">{url}</a>
-          </div>
+          </section>
         );
       
       case "pictureGallery":
@@ -151,7 +147,7 @@ export default function Post({ post }) {
             {galleryUrls.map(galleryObject => {
               const key = Object.keys(galleryObject);
               const value = Object.values(galleryObject)
-              return <img className="post-img"src={value[0]} alt="url" key={key[0]}/>
+              return <img className="post-img"src={value[0]} alt="Post Picture" key={key[0]}/>
             })}
           </ul>
         );
@@ -159,53 +155,53 @@ export default function Post({ post }) {
       case "youTube":
         const youTubeUrl = url.replaceAll("amp;", "");
         return (
-          <div className="link">
-            <img src={youTubePreview} className="post-img" alt="url" />
+          <section className="link">
+            <img src={youTubePreview} className="post-img" alt="Post Picture" />
             <a href={youTubeUrl} className="link-url" target="_blank" rel="noopener noreferrer">{youTubeUrl}</a>
-          </div>
+          </section>
         );
         
       case "text":
         return <p className="text">{selftextHtml}</p>;
         
       default:
-        return <img src={require("./backUp.jpg")} className="post-img"/>;
+        return <img src={require("./backUp.jpg")} className="post-img" alt="Have a Wonderful Day written on chalkboard" />;
   }};
   
 
   return (
-    <div>
+    <article>
       <li className='post-container'>
-          <h3 className="title">{title}</h3>
+          <h1 className="title">{title}</h1>
 
           <div className="post-polaroid">
-            <img className="tape" src={require("./tape.png")}/>
+            <img className="tape" src={require("./tape.png")} alt="piece of masking tape"/>
 
-            <div className="post-polaroid-media">
+            <figure className="post-polaroid-media">
               {polaroidMedia()}
-            </div>
+            </figure>
 
-            <div className="about">
-              <div className="vote">
+            <footer className="about">
+              <section className="vote">
                 <div className="vote-center">
-                  <img className="upVote" src={require("./upArrow.png")} alt="up vote"/>
+                  <img className="upVote" src={require("./upArrow.png")} alt="up arrow"/>
                   <p className="score">{score}</p>
-                  <img className="downVote" src={require("./downArrow.png")} alt="down vote"/>
+                  <img className="downVote" src={require("./downArrow.png")} alt="down arrow"/>
                 </div>
-              </div>
+              </section>
 
               <p className="author">{author}</p>
 
-              <div className="comments hover" key={id} onClick={handleOnClick}>
+              <section className="comments hover" key={id} onClick={handleOnClick}>
                 <div>
-                  <img className="comment-img" src={require("./comment.png")} alt="com"/>
+                  <img className="comment-img" src={require("./comment.png")} alt="comment bubble"/>
                   <p className="num-comments">{numComments}</p>
                 </div>   
-              </div>
-            </div>
+              </section>
+            </footer>
           </div>
       </li>
       <Comments id={id}/>
-    </div>
+    </article>
   );
 }

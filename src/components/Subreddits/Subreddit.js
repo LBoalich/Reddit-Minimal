@@ -24,7 +24,7 @@ export default function Subreddit({ subreddit }) {
   return (
     <li className='subreddit-container hover' onClick={handleOnClick} >
         <img src={img} alt={`${name} icon`} className="subreddit-icon" /> 
-        <p className="subreddit-name">{name}</p>
+        <h2 className="subreddit-name">{name}</h2>
     </li>
   );
 };

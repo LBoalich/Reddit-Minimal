@@ -35,22 +35,22 @@ const Subreddits = () => {
   const MobileComponent = () => {
     if (subredditsVisable) {
       return (
-        <div className='subreddits-container hover' onClick={handleSubredditsClick}>
-          {subredditsAreLoading ? <div className="loading">Loading Subreddits</div> : null}
-          <h3 className='subreddits-title'>Subreddits</h3>
+        <section className='subreddits-container hover' onClick={handleSubredditsClick}>
+          {subredditsAreLoading ? <h1 className="loading">Loading Subreddits</h1> : null}
+          <h1 className='subreddits-title'>Subreddits</h1>
           <SubredditsList subreddits={subreddits} />
-        </div>
+        </section>
       );
     } else {
         return null;
       }
   };
   const DesktopComponent = () => (
-    <div className='subreddits-container'>
-      {subredditsAreLoading ? <div className="loading">Loading Subreddits</div> : null}
-      <h3 className='subreddits-title'>Subreddits</h3>
+    <section className='subreddits-container'>
+      {subredditsAreLoading ? <h1 className="loading">Loading Subreddits</h1> : null}
+      <h1 className='subreddits-title'>Subreddits</h1>
       <SubredditsList subreddits={subreddits} />
-    </div>
+    </section>
   );
 
   return width < breakpoint ? <MobileComponent /> : <DesktopComponent />;
