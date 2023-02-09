@@ -53,8 +53,21 @@ export default function Post({ post }) {
   let isText;
   selftextHtml ? isText = true : isText = false;
 
-  let isPicture;
-  (url.endsWith(".jpg") || url.endsWith(".png") || url.endsWith(".gif")) ? isPicture = true : isPicture = false;
+  let isPicture = false;
+  let pictureUrl;
+  if (url.endsWith(".jpg") || url.endsWith(".png") || url.endsWith(".gif")) {
+    if (url.endsWith(".gif")) {
+      pictureUrl = url;  
+    } else {
+      try {
+        const picturePreview = preview.images;
+        pictureUrl = picturePreview[0].resolutions[3].url.replaceAll("amp;", "");
+        isPicture = true;
+      } catch {
+        pictureUrl = url;
+        isPicture = true;
+      }
+  }};
 
   let youTubePreview;
   let isYoutube;
@@ -131,7 +144,7 @@ export default function Post({ post }) {
         );
 
       case "picture":
-        return <img className="post-img" src={url} alt="Post" />;
+        return <img className="post-img" src={pictureUrl} alt="Post" />;
 
       case "link":
         return (

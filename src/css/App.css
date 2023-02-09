@@ -61,7 +61,7 @@ html {
 
 .logo-img {
   height: 40px;
-  width: auto;
+  width: 38px;
 }
 
 #search-container {
@@ -260,6 +260,7 @@ html {
 
 .upVote {
   height: 20px;
+  width: 20px;
 }
 
 .score {
@@ -271,6 +272,7 @@ html {
 
 .downVote {
   height: 20px;
+  width: 20px
 }
 
 .author {
@@ -302,6 +304,7 @@ html {
 
 .comment-img {
   height: 25px;
+  width: 30px;
   padding-right: 5px;
 }
 
