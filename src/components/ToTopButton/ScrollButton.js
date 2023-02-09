@@ -31,13 +31,13 @@ const ScrollButton = () =>{
   const MobileComponent = () => (
     <MobileButton>
      <FaArrowCircleUp onClick={scrollToTop} 
-     style={{display: visible ? 'inline' : 'none'}} />
+     style={{display: visible ? 'inline' : 'none'}} data-testid="scroll-button"/>
     </MobileButton>
   );
   const DesktopComponent = () => (
     <Button>
      <FaArrowCircleUp onClick={scrollToTop} 
-     style={{display: visible ? 'inline' : 'none'}} />
+     style={{display: visible ? 'inline' : 'none'}} data-testid="scroll-button"/>
     </Button>
   );
 

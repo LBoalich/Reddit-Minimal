@@ -192,7 +192,7 @@ export default function Post({ post }) {
 
               <p className="author">{author}</p>
 
-              <section className="comments hover" key={id} onClick={handleOnClick}>
+              <section className="comments hover" key={id} onClick={handleOnClick} data-testid="comment-button">
                 <div>
                   <img className="comment-img" src={require("./comment.png")} alt="comment bubble"/>
                   <p className="num-comments">{numComments}</p>
