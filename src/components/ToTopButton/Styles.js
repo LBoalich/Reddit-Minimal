@@ -9,7 +9,7 @@ export const Button = styled.div`
     font-size: 3rem;
     z-index: 1;
     cursor: pointer;
-    color: #F2C5C4;
+    color: #5FBBED;
 `
 
 export const MobileButton = styled.div`
@@ -21,5 +21,5 @@ export const MobileButton = styled.div`
     font-size: 2rem;
     z-index: 1;
     cursor: pointer;
-    color: #F2C5C4;
+    color: #5FBBED;
 `
