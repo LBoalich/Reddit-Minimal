@@ -1,3 +1,52 @@
+# redditBoard
+
+---
+
+## Description
+This project was created to complete a Codecademy portfolio project for the Front-End Engineer career path.  It uses react, redux, and the reddit JSON API to make a fun chalkboard themed website.  Users can view posts from a list of subreddits, see comments for posts, and search for content. 
+
+---
+
+## Features
+    - **Responsive**:  Flexbox design and ViewPort component allows the website to look great on any device.  
+
+    ![Desktop](./READMEimgs/desktop.png)
+
+    ![Mobile](./READMEimgs/mobile-posts.png)
+
+    - **Easy to use**: Navigation bar has clickable images and text to return users to the popular subreddit posts that appear when first opening the site.  The search bar automatically changes the posts to match the search term.  Users can click on a subreddit name to view posts for that subreddit.  On small screens, the subreddits list is viewable by clicking the subreddits button in the navigation bar.  When searching for new posts or clicking a subreddit, the screen automatically takes you back to the top of the page so users do not have to scroll to the beginning.  Clicking on the comment bubble image opens comments for that post.  An x image on each comment closes the comments.  After scrolling down the page, an arrow appears to easily take you back to the top of the page.       
+
+    ![Mobile subreddits](./READMEimgs/mobile-subreddits.png)
+
+    ![Comments](./READMEimgs/comments.png)
+
+    - **Cohesive Design**: The reddit Board theme starts with the background image that displays a chalkboard with various drawings and writing.  Continuing with this theme all of the text on the page appears to be handwritten, including post and comment author names that use cursive handwriting font.  The colors used resemble sidewalk chalk.  The posts look like polaroid images taped to the chalkboard.  And the comments use a lined paper background.  
+
+## How to Use
+Simply open [reddit Board](https://reddit-board.netlify.app/) in any browser to use the website.
+
+---
+
+## Technologies
+    - node.js: 18.12.1
+    - react: 18.2.0
+    - react-dom: 18.2.0
+    - react-icons: 4.7.1
+    - react-scripts: 5.0.1
+    - react-redux: 8.0.5
+    - reduxjs/toolkit: 1.9.1
+    - styled-components: 5.3.6
+    - web-vitals: 2.1.4
+    - testing-library/jest-dom: 5.16.5
+    - testing-library/react: 13.4.0
+    - testing-library/user-event: 14.4.3
+    - msw: 1.0.0
+    - html
+    - css
+
+
+
+
 # Getting Started with Create React App and Redux
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
