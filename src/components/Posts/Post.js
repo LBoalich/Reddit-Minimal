@@ -135,12 +135,12 @@ export default function Post({ post }) {
     switch (getKeyByValue(mediaType, true)) {
       case "video":
         return (
-          <video className="post-media" autoPlay muted controls loop src={mediaUrl}>Video not supported</video>
+          <video className="post-media" playsinline autoPlay muted controls loop src={mediaUrl}>Video not supported</video>
         );
 
       case "previewVideo":
         return (
-          <video className="post-media" autoPlay muted controls loop src={previewUrl}>Video not supported</video>
+          <video className="post-media" playsinline autoPlay muted controls loop src={previewUrl}>Video not supported</video>
         );
 
       case "picture":
