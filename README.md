@@ -42,6 +42,7 @@ Simply open [redditBoard](https://reddit-board.netlify.app/) in any browser to u
 * testing-library/react: 13.4.0
 * testing-library/user-event: 14.4.3
 * msw: 1.0.0
+* javascript
 * html
 * css
 * markdown
